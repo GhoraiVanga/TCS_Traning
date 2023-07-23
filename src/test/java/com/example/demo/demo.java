@@ -169,13 +169,42 @@ public class demo {
 
     @Test
     public void checkConcatWithNull() {
-
-
-
         String expected = StringUtils.concat();
-
         assertNull(expected);
-
     }
+
+    @Test
+
+    public void exception_Test()
+    {
+        String str = null ;
+        assertThrows( IllegalArgumentException.class, () -> {
+            StringUtils.convertToInt(str);
+        }) ;
+    }
+
+    @Test
+    public void convertToIntNullParameterExpectThrows() {
+        String st = null;
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            StringUtils.convertToInt(st);
+        });
+        assertEquals("String must be not null or empty", exception.getMessage());
+    }
+
+    @Test
+    public void convertToIntNullParameterTryCatchIdiom() {
+        String st = null;
+        try {
+            StringUtils.convertToInt(st);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException e) {
+            assertEquals("String must be not null or empty", e.getMessage());
+        }
+    }
+
+
+
+
 
 }
